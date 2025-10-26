@@ -1,66 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Lessons - Learn English</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --primary: #AC7E6E;
-            --secondary: #C9ADA7;
-            --accent: #EADBD6;
-            --text-main: #9A8C98;
-            --text-secondary: #97A2A6;
-        }
-    </style>
-</head>
-<body class="bg-[var(--primary)] text-[var(--text-main)] font-sans min-h-screen">
+{% extends 'base.html' %}
+{% block title %}Manage Lessons - Learn English{% endblock %}
+{% block content %}
+  <h2 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1rem;">Manage Lessons</h2>
 
-    <header class="bg-[var(--secondary)] p-4 flex justify-between items-center">
-        <h1 class="text-3xl font-bold">Manage Lessons</h1>
-        <nav class="space-x-4">
-            <a href="{% url 'index' %}" class="hover:underline">Home</a>
-            <a href="{% url 'logout' %}" class="hover:underline">Logout</a>
-        </nav>
-    </header>
+  <section class="card">
+    <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Add New Lesson</h3>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Upload Lesson</button>
+    </form>
+  </section>
 
-    <main class="p-6 max-w-3xl mx-auto">
-
-        <!-- Add Lesson Form -->
-        <section class="bg-[var(--accent)] p-6 rounded-lg shadow mb-6">
-            <h2 class="text-xl font-bold mb-4">Add New Lesson</h2>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="w-full bg-[var(--secondary)] text-[var(--text-secondary)] py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
-                    Upload Lesson
-                </button>
-            </form>
-        </section>
-
-        <!-- Existing Lessons -->
-        <section class="bg-[var(--accent)] p-6 rounded-lg shadow">
-            <h2 class="text-xl font-bold mb-4">Existing Lessons</h2>
-            <ul>
-                {% for lesson in lessons %}
-                    <li class="flex justify-between items-center mb-2 bg-[var(--secondary)] p-2 rounded">
-                        <span>{{ lesson.title }}</span>
-                        <form method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="lesson_id" value="{{ lesson.id }}">
-                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
-                                Delete
-                            </button>
-                        </form>
-                    </li>
-                {% empty %}
-                    <li class="text-[var(--text-secondary)] text-center">No lessons yet.</li>
-                {% endfor %}
-            </ul>
-        </section>
-
-    </main>
-
-</body>
-</html>
+  <section class="card">
+    <h3 style="color: var(--primary); margin-bottom: 1rem;">Existing Lessons</h3>
+    <ul style="list-style: none;">
+      {% for lesson in lessons %}
+        <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px;">
+          <span>{{ lesson.title }}</span>
+          <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="lesson_id" value="{{ lesson.id }}">
+            <button type="submit" style="background-color: #dc2626;">Delete</button>
+          </form>
+        </li>
+      {% empty %}
+        <li style="color: var(--text-secondary); text-align: center;">No lessons yet.</li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock %}

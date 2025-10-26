@@ -1,52 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lessons - Learn English</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --primary: #AC7E6E;
-            --secondary: #C9ADA7;
-            --accent: #EADBD6;
-            --text-main: #9A8C98;
-            --text-secondary: #97A2A6;
-        }
-    </style>
-</head>
-<body class="bg-[var(--primary)] text-[var(--text-main)] font-sans min-h-screen flex flex-col">
-
-    <!-- Header -->
-    <header class="bg-[var(--secondary)] p-4 flex justify-between items-center">
-        <h1 class="text-3xl font-bold">Lessons</h1>
-        <nav class="space-x-4">
-            <a href="{% url 'index' %}" class="hover:underline">Home</a>
-            <a href="{% url 'logout' %}" class="hover:underline">Logout</a>
-        </nav>
-    </header>
-
-    <!-- Lessons List -->
-    <main class="flex-grow p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for lesson in lessons %}
-            <div class="bg-[var(--accent)] p-4 rounded-lg shadow hover:shadow-lg transition">
-                <h2 class="text-xl font-bold mb-2">{{ lesson.title }}</h2>
-                <p class="mb-4">{{ lesson.description }}</p>
-                {% if lesson.video_url %}
-                    <video controls class="w-full rounded">
-                        <source src="{{ lesson.video_url }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                {% endif %}
-            </div>
-        {% empty %}
-            <p class="text-[var(--text-secondary)] col-span-full text-center">No lessons available yet.</p>
-        {% endfor %}
-    </main>
-
-    <footer class="bg-[var(--accent)] text-[var(--text-secondary)] p-4 text-center">
-        &copy; 2025 Learn English
-    </footer>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Lessons - Learn English{% endblock %}
+{% block content %}
+  <h2 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1rem;">Lessons</h2>
+  {% for lesson in lessons %}
+    <div class="card">
+      <h3 style="color: var(--primary); margin-bottom: 0.5rem;">{{ lesson.title }}</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">{{ lesson.description }}</p>
+      {% if lesson.video_url %}
+        <video controls style="width: 100%; border-radius: 8px;">
+          <source src="{{ lesson.video_url }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </div>
+  {% empty %}
+    <p style="text-align: center; color: var(--text-secondary);">No lessons available yet.</p>
+  {% endfor %}
+{% endblock %}

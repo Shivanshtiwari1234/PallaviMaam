@@ -1,35 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Learn English</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --primary: #AC7E6E;
-            --secondary: #C9ADA7;
-            --accent: #EADBD6;
-            --text-main: #9A8C98;
-            --text-secondary: #97A2A6;
-        }
-    </style>
-</head>
-<body class="bg-[var(--primary)] text-[var(--text-main)] font-sans flex items-center justify-center min-h-screen">
-
-    <div class="bg-[var(--secondary)] p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="w-full bg-[var(--accent)] text-[var(--text-secondary)] py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
-                Login
-            </button>
-        </form>
-        <p class="mt-4 text-center text-[var(--text-secondary)]">
-            Don't have an account? <a href="{% url 'register' %}" class="underline hover:text-white">Register</a>
-        </p>
-    </div>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Login - Learn English{% endblock %}
+{% block content %}
+  <div class="centered-box">
+    <h2 style="color: var(--primary); margin-bottom: 1rem;">Login</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+    </form>
+    <p style="margin-top: 1rem;">
+      Don't have an account? <a href="{% url 'register' %}" style="color: var(--secondary); text-decoration: none;">Register</a>
+    </p>
+  </div>
+{% endblock %}
