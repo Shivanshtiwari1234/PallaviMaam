@@ -1,32 +1,32 @@
 {% extends 'base.html' %}
-{% block title %}Manage Lessons - Learn English{% endblock %}
+{% block title %}Manage Lessons{% endblock %}
+
 {% block content %}
-  <h2 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1rem;">Manage Lessons</h2>
+<div class="centered-box">
+  <h2>Manage Lessons</h2>
 
-  <section class="card">
-    <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Add New Lesson</h3>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Upload Lesson</button>
-    </form>
-  </section>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
 
-  <section class="card">
-    <h3 style="color: var(--primary); margin-bottom: 1rem;">Existing Lessons</h3>
-    <ul style="list-style: none;">
-      {% for lesson in lessons %}
-        <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px;">
-          <span>{{ lesson.title }}</span>
-          <form method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="lesson_id" value="{{ lesson.id }}">
-            <button type="submit" style="background-color: #dc2626;">Delete</button>
-          </form>
-        </li>
-      {% empty %}
-        <li style="color: var(--text-secondary); text-align: center;">No lessons yet.</li>
-      {% endfor %}
-    </ul>
-  </section>
+    <label for="id_title">Title</label>
+    <input type="text" name="title" id="id_title" placeholder="Lesson title" required>
+
+    <label for="id_description">Description</label>
+    <textarea name="description" id="id_description" placeholder="Enter a short description" required></textarea>
+
+    <label for="id_video">Video File</label>
+    <input type="file" name="video" id="id_video" accept="video/*" required>
+
+    <button type="submit" class="btn">Add Lesson</button>
+  </form>
+
+  <h3 style="margin-top: 2rem;">Existing Lessons</h3>
+  <ul>
+    {% for lesson in lessons %}
+      <li>{{ lesson.title }}</li>
+    {% empty %}
+      <li>No lessons yet.</li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

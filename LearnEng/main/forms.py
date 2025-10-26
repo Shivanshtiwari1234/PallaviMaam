@@ -26,8 +26,9 @@ class RegisterForm(forms.ModelForm):
 class LessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = ['title', 'video']
+        fields = ['title', 'description', 'video']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'w-full p-2 rounded border'}),
+            'description': forms.Textarea(attrs={'class': 'w-full p-2 rounded border'}),
             'video': forms.FileInput(attrs={'class': 'w-full p-2 rounded border'}),
         }
