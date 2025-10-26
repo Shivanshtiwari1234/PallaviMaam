@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Lesson(models.Model):
     title = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
     video = models.FileField(upload_to='videos/')
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
