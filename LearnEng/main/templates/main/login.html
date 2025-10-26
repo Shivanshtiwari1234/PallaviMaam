@@ -1,15 +1,46 @@
 {% extends 'base.html' %}
 {% block title %}Login - Learn English{% endblock %}
+
 {% block content %}
-  <div class="centered-box">
-    <h2 style="color: var(--primary); margin-bottom: 1rem;">Login</h2>
-    <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Login</button>
-    </form>
-    <p style="margin-top: 1rem;">
-      Don't have an account? <a href="{% url 'register' %}" style="color: var(--secondary); text-decoration: none;">Register</a>
-    </p>
-  </div>
+<div class="centered-box">
+  <h2>Login</h2>
+
+  <form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+
+    <!-- Username -->
+    <label for="username">Username</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      placeholder="Enter your username"
+      required
+    >
+
+    <!-- Password -->
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      placeholder="Enter your password"
+      required
+    >
+
+    <!-- Submit -->
+    <button type="submit" class="btn">Login</button>
+
+    {% if error %}
+      <p style="color: red; margin-top: 1rem;">Invalid username or password. Please try again.</p>
+    {% endif %}
+  </form>
+
+  <p class="mt-4">
+    Don’t have an account?
+    <a href="{% url 'register' %}" style="color: var(--color-primary-light); text-decoration: underline;">
+      Register here
+    </a>
+  </p>
+</div>
 {% endblock %}
