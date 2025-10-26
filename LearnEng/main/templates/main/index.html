@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn English</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom colors */
+        :root {
+            --primary: #AC7E6E;
+            --secondary: #C9ADA7;
+            --accent: #EADBD6;
+            --text-main: #9A8C98;
+            --text-secondary: #97A2A6;
+        }
+    </style>
+</head>
+<body class="bg-[var(--primary)] text-[var(--text-main)] font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-[var(--secondary)] p-4 flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Learn English</h1>
+        <nav class="space-x-4">
+            <a href="{% url 'index' %}" class="hover:underline">Home</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'lessons' %}" class="hover:underline">Lessons</a>
+                {% if user.is_superuser %}
+                    <a href="{% url 'manage_lessons' %}" class="hover:underline">Manage Lessons</a>
+                {% endif %}
+                <a href="{% url 'logout' %}" class="hover:underline">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="hover:underline">Login</a>
+                <a href="{% url 'register' %}" class="hover:underline">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-grow flex flex-col justify-center items-center text-center p-8">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Learn English!</h2>
+        <p class="text-lg md:text-xl mb-6 max-w-xl">
+            Improve your English skills from kids to adults. Sign up today to access all lessons.
+        </p>
+        {% if not user.is_authenticated %}
+        <a href="{% url 'register' %}" class="bg-[var(--accent)] text-[var(--text-secondary)] px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition">
+            Get Started
+        </a>
+        {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--accent)] text-[var(--text-secondary)] p-4 text-center">
+        &copy; 2025 Learn English
+    </footer>
+
+</body>
+</html>
