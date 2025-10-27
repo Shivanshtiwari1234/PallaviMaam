@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-_+408l**%n-(ke4(%#8vtdnmt5hs*(^pn6vhv2&hw7hc14d3@r'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.33', 'localhost']
 
 # Installed apps
 INSTALLED_APPS = [
@@ -16,7 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',  # Your app
+    'main',
 ]
 
 # Middleware
@@ -85,7 +85,7 @@ USE_TZ = True
 
 # Static files (CSS, JS)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [BASE_DIR / 'main' / 'static']
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
