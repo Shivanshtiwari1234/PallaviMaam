@@ -6,11 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Learn English{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
+  <!-- ===== HEADER ===== -->
   <header>
-    <h1>Learn English</h1>
+    <h1><a href="{% url 'index' %}" style="color: white; text-decoration: none;">Learn English</a></h1>
     <nav>
       <a href="{% url 'index' %}">Home</a>
       {% if user.is_authenticated %}
@@ -26,12 +30,15 @@
     </nav>
   </header>
 
+  <!-- ===== MAIN CONTENT ===== -->
   <main>
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
   </main>
 
+  <!-- ===== FOOTER ===== -->
   <footer>
-    &copy; 2025 Learn English
+    <p> Copyright &copy; 2025 Learn English</p>
   </footer>
 
 </body>
