@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.debugpy",
+    "batisteo.vscode-django",
+    "littlefoxteam.vscode-django-snippets",
+    "ms-python.black-formatter",
+    "ms-python.isort",
+    "ms-python.pylint",
+    "esbenp.prettier-vscode",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "tamasfe.even-better-toml",
+    "usernamehw.errorlens"
+  ]
+}

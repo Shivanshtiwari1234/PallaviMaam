@@ -1,0 +1,99 @@
+# ============================================================
+# Universal .editorconfig — Django + Modern Frontend (Windows)
+# Compatible with VS Code, JetBrains, and others
+# ============================================================
+
+root = true
+
+# ------------------------------------------------------------
+# Global defaults
+# ------------------------------------------------------------
+[*]
+charset = utf-8
+end_of_line = crlf                # ✅ Windows line endings
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+tab_width = 4
+max_line_length = 100
+
+# ------------------------------------------------------------
+# Python (Django, management scripts, etc.)
+# ------------------------------------------------------------
+[*.py]
+indent_size = 4
+max_line_length = 88              # Black-compatible
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# JetBrains Python IDE hints
+ij_python_spaces_around_operators = true
+ij_python_blank_lines_around_top_level_classes_functions = 2
+ij_python_blank_lines_around_method_in_class = 1
+ij_python_keep_indents_on_empty_lines = false
+
+# ------------------------------------------------------------
+# HTML + Django Templates
+# ------------------------------------------------------------
+[*.html]
+indent_size = 2
+indent_style = space
+max_line_length = 120
+trim_trailing_whitespace = true
+
+# JetBrains specific formatting
+ij_html_do_not_indent_children_of = "html,body,head"
+ij_html_indent_inner_html = true
+ij_html_new_line_before_first_attribute = true
+ij_html_new_line_after_last_attribute = true
+
+# ------------------------------------------------------------
+# CSS / SCSS
+# ------------------------------------------------------------
+[*.{css,scss}]
+indent_size = 2
+max_line_length = 120
+trim_trailing_whitespace = true
+ij_css_align_properties = true
+ij_css_new_line_after_selector = true
+
+# ------------------------------------------------------------
+# JavaScript / JSON / JSX
+# ------------------------------------------------------------
+[*.{js,json,jsx}]
+indent_size = 2
+max_line_length = 100
+quote_type = double
+trim_trailing_whitespace = true
+
+ij_javascript_use_double_quotes = true
+ij_javascript_space_before_function_left_parenthesis = false
+ij_javascript_spaces_around_operators = true
+ij_javascript_blank_lines_around_functions = 1
+
+# ------------------------------------------------------------
+# Markdown / Text
+# ------------------------------------------------------------
+[*.{md,txt}]
+trim_trailing_whitespace = false
+max_line_length = off
+indent_size = 2
+
+# ------------------------------------------------------------
+# YAML / TOML / INI
+# ------------------------------------------------------------
+[*.{yml,yaml,toml,ini}]
+indent_size = 2
+indent_style = space
+trim_trailing_whitespace = true
+
+# ------------------------------------------------------------
+# VS Code Settings JSON
+# ------------------------------------------------------------
+[settings.json]
+indent_size = 2
+
+# ------------------------------------------------------------
+# End of file marker
+# ------------------------------------------------------------
