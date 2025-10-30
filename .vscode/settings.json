@@ -1,35 +1,21 @@
 {
-  // ============================================
-  // VS Code Workspace Settings — Django Project
-  // ============================================
-
-  // ----------- Python Environment -------------
-  "python.defaultInterpreterPath": "${workspaceFolder}/venv/Scripts/python.exe",
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
   "python.terminal.activateEnvironment": true,
-
-  // ----------- Django-Specific ---------------
   "python.analysis.extraPaths": [
     "${workspaceFolder}"
   ],
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.flake8Enabled": false,
   "python.analysis.autoImportCompletions": true,
   "python.envFile": "${workspaceFolder}/.env",
-
-  // ------------- Editor Behavior --------------
   "editor.formatOnSave": true,
   "editor.tabSize": 4,
   "editor.insertSpaces": true,
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
-  "files.eol": "\r\n",
-
-  // ------------- Code Formatting --------------
-  "python.formatting.provider": "black",
+  "[python]": {
+    "editor.rulers": [],
+    "editor.wordWrap": "off"
+  },
   "isort.args": ["--profile", "black"],
-
-  // ------------- Django Templates -------------
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -38,21 +24,5 @@
   },
   "files.associations": {
     "**/templates/**/*.html": "django-html"
-  },
-
-  // ------------- Debugging Config -------------
-  "launch": {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Python: Django",
-        "type": "python",
-        "request": "launch",
-        "program": "${workspaceFolder}/manage.py",
-        "args": ["runserver", "8000"],
-        "django": true,
-        "justMyCode": true
-      }
-    ]
   }
 }
