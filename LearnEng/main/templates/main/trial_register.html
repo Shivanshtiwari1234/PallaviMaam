@@ -1,0 +1,10 @@
+{% extends 'main/base.html' %} {% block title %}Trial | Learn English{% endblock %} {% block content %}
+<div class="auth-card">
+  <h2>Start Your Free Trial</h2>
+  <p>You’ll get full access for 7 days — no verification required.</p>
+  <form method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="btn primary">Start Trial</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,18 +1,17 @@
-{% extends 'base.html' %}
-{% block title %}Lessons - Learn English{% endblock %}
-{% block content %}
-  <h2 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 1rem;">Lessons</h2>
+{% extends 'main/base.html' %} {% block title %}Lessons | Learn English{% endblock %} {% block content %}
+<h2>Available Lessons</h2>
+<div class="lesson-list">
   {% for lesson in lessons %}
-    <div class="card">
-      <h3 style="color: var(--primary); margin-bottom: 0.5rem;">{{ lesson.title }}</h3>
-      <p style="color: var(--text-secondary); margin-bottom: 1rem;">{{ lesson.description }}</p>
-      {% if lesson.video_url %}
-        <video controls style="width: 100%; border-radius: 8px;">
-          <source src="{{ lesson.video_url }}" type="video/mp4">
-        </video>
-      {% endif %}
-    </div>
+  <div class="lesson-card">
+    <h3>{{ lesson.title }}</h3>
+    <video controls>
+      <source src="{{ lesson.video.url }}" type="video/mp4" />
+      Your browser does not support video playback.
+    </video>
+    <p>Uploaded: {{ lesson.created_at|date:"F j, Y" }}</p>
+  </div>
   {% empty %}
-    <p style="text-align: center; color: var(--text-secondary);">No lessons available yet.</p>
+  <p>No lessons available yet.</p>
   {% endfor %}
+</div>
 {% endblock %}

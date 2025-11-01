@@ -1,46 +1,23 @@
-{% extends 'base.html' %}
-{% block title %}Login - Learn English{% endblock %}
+{% extends 'main/base.html' %} {% block title %}Login | Learn English{% endblock %} {% block content %}
+<div class="centered-box auth-box">
+  <h2><span class="material-icons-rounded icon-accent">login</span> Sign In</h2>
 
-{% block content %}
-<div class="centered-box">
-  <h2>Login</h2>
-
-  <form method="POST" action="{% url 'login' %}">
+  <form method="POST" class="auth-form">
     {% csrf_token %}
+    <div class="form-group">
+      <input type="text" name="username" placeholder="Username" required class="input-field" />
+    </div>
 
-    <!-- Username -->
-    <label for="username">Username</label>
-    <input
-      type="text"
-      id="username"
-      name="username"
-      placeholder="Enter your username"
-      required
-    >
+    <div class="form-group">
+      <input type="password" name="password" placeholder="Password" required class="input-field" />
+    </div>
 
-    <!-- Password -->
-    <label for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      name="password"
-      placeholder="Enter your password"
-      required
-    >
-
-    <!-- Submit -->
-    <button type="submit" class="btn">Login</button>
-
-    {% if error %}
-      <p style="color: red; margin-top: 1rem;">Invalid username or password. Please try again.</p>
-    {% endif %}
+    <button type="submit" class="btn full-width">Login</button>
   </form>
 
-  <p class="mt-4">
+  <p class="form-note">
     Don’t have an account?
-    <a href="{% url 'register' %}" style="color: var(--color-primary-light); text-decoration: underline;">
-      Register here
-    </a>
+    <a href="{% url 'register' %}" class="link-accent">Register</a>
   </p>
 </div>
 {% endblock %}

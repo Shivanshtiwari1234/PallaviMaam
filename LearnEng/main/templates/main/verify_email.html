@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %} {% block title %}Verify Email | Learn English{% endblock %} {% block content %}
+<div class="centered-box auth-box">
+  <h2><span class="material-icons-rounded icon-accent">mark_email_unread</span> Verify Email</h2>
+
+  <p class="info-text">
+    We’ve sent a verification code to <strong>{{ email }}</strong>. Please enter it below to continue.
+  </p>
+
+  <form method="POST" class="auth-form">
+    {% csrf_token %}
+    <div class="form-group">
+      <input
+        type="text"
+        name="code"
+        placeholder="Enter 6-digit code"
+        maxlength="6"
+        required
+        class="input-field input-code"
+      />
+    </div>
+
+    <button type="submit" class="btn full-width">Verify</button>
+  </form>
+
+  <p class="form-note">
+    Didn’t get it?
+    <a href="{% url 'resend_verification' %}" class="link-accent">Resend Code</a>
+  </p>
+</div>
+{% endblock %}
