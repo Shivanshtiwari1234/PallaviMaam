@@ -2,39 +2,63 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- ===== META ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Learn English{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'main/styles.css' %}" />
+
+    <!-- ===== FONTS ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ===== STYLES ===== -->
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}" />
   </head>
+
   <body>
     <!-- ===== HEADER ===== -->
-    <header>
-      <h1><a href="{% url 'index' %}" style="color: white; text-decoration: none">Learn English</a></h1>
-      <nav>
-        <a href="{% url 'index' %}">Home</a>
-        {% if user.is_authenticated %}
-        <a href="{% url 'lessons' %}">Lessons</a>
-        {% if user.is_superuser %}
-        <a href="{% url 'manage_lessons' %}">Manage Lessons</a>
-        {% endif %}
-        <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'register' %}">Register</a>
-        {% endif %}
-      </nav>
+    <header class="site-header">
+      <div class="header-inner">
+        <h1 class="logo">
+          <a href="{% url 'index' %}" class="home-link">Learn English</a>
+        </h1>
+        <nav class="nav-links">
+          <a href="{% url 'index' %}">Home</a>
+          {% if user.is_authenticated %}
+          <a href="{% url 'lessons' %}">Lessons</a>
+          {% if user.is_superuser %}
+          <a href="{% url 'manage_lessons' %}">Manage Lessons</a>
+          {% endif %}
+          <a href="{% url 'logout' %}">Logout</a>
+          {% else %}
+          <a href="{% url 'login' %}">Login</a>
+          <a href="{% url 'register' %}">Register</a>
+          {% endif %}
+        </nav>
+      </div>
     </header>
 
     <!-- ===== MAIN CONTENT ===== -->
-    <main>{% block content %} {% endblock %}</main>
+    <main id="main-content">
+      {% block content %}
+      <section class="centered-box reveal">
+        <h2>Welcome to Learn English</h2>
+        <p>Master English through interactive lessons and cinematic experiences.</p>
+        <a href="{% url 'lessons' %}" class="btn">Get Started</a>
+      </section>
+      {% endblock %}
+    </main>
 
     <!-- ===== FOOTER ===== -->
-    <footer>
-      <p>Copyright &copy; 2025 Shivanshtiwari1234</p>
+    <footer class="site-footer">
+      <p>© 2025 Shivanshtiwari1234 — All rights reserved.</p>
     </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="{% static 'main/interactive.js' %}"></script>
   </body>
 </html>

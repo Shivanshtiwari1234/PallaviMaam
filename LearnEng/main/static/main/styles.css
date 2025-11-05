@@ -1,18 +1,18 @@
-/* ==========================================
+/* ===========================================================
    Learn English — Enhanced Blue & White Theme
-   High Contrast • Elegant • Accessible
-   ========================================== */
+   Cinematic • Sharp • Accessible • Refined
+   =========================================================== */
 
 /* ---------- THEME COLORS ---------- */
 :root {
-  --color-primary: #002b8a;          /* Deep, rich royal blue */
+  --color-primary: #002b8a;          /* Deep royal blue */
   --color-primary-light: #1d4ed8;    /* Bright cobalt blue */
-  --color-accent: #e0f2fe;           /* Gentle sky-blue tint */
+  --color-accent: #e0f2fe;           /* Soft sky tint */
   --color-bg: #ffffff;               /* Clean white background */
-  --color-surface: #f9fafb;          /* Very pale gray-blue */
+  --color-surface: #f9fafb;          /* Pale gray-blue */
   --color-text: #0f172a;             /* Deep navy-black text */
   --color-muted: #334155;            /* Medium gray-blue text */
-  --color-border: #cbd5e1;           /* Soft light border */
+  --color-border: #cbd5e1;           /* Soft border */
 
   --radius: 10px;
   --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
@@ -44,6 +44,8 @@
 html, body {
   height: 100%;
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -55,58 +57,80 @@ body {
   line-height: 1.7;
 }
 
-/* ---------- HEADER ---------- */
-header {
-  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  color: #ffffff;
-  padding: 1.2rem 2rem;
+/* ===========================================================
+   HEADER & NAVIGATION
+   =========================================================== */
+.site-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.4rem 2rem;
+  background: linear-gradient(90deg, #002b8a, #1d4ed8);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background 1.5s ease, padding 0.3s ease;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: var(--max-width);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: var(--shadow);
 }
 
-header h1 {
-  font-size: 1.9rem;
+/* ---------- LOGO ---------- */
+.logo a.home-link {
+  font-family: "Outfit", sans-serif;
   font-weight: 800;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-nav a {
+  font-size: 1.95rem;
+  letter-spacing: 0.7px;
   color: #ffffff;
   text-decoration: none;
-  margin-left: 1.5rem;
-  font-weight: 600;
-  position: relative;
-  transition: color var(--transition), transform var(--transition);
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, text-shadow 0.5s ease;
 }
 
-nav a::after {
+.logo a.home-link:hover {
+  opacity: 0.95;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6),
+               0 0 16px rgba(59, 130, 246, 0.5);
+}
+
+/* ---------- NAV LINKS ---------- */
+.nav-links a {
+  color: #e0e7ff;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 1.8rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+.nav-links a::after {
   content: "";
   position: absolute;
-  bottom: -3px;
   left: 0;
+  bottom: -4px;
   width: 0%;
   height: 2px;
-  background: #ffffff;
-  transition: width var(--transition);
+  background: white;
+  transition: width 0.3s ease;
 }
 
-nav a:hover::after {
+.nav-links a:hover::after {
   width: 100%;
 }
 
-nav a:hover {
-  transform: translateY(-1px);
-}
-
-/* ---------- MAIN CONTENT ---------- */
+/* ===========================================================
+   MAIN CONTENT
+   =========================================================== */
 main {
   flex: 1;
   width: 100%;
@@ -115,18 +139,38 @@ main {
   padding: 2rem;
 }
 
-/* ---------- FOOTER ---------- */
-footer {
-  background-color: var(--color-primary);
-  color: #ffffff;
+.centered-box {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.8rem;
+  max-width: 420px;
+  margin: 6rem auto;
   text-align: center;
-  padding: 1.2rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
+  transition: transform var(--transition), background-color var(--transition);
 }
 
-/* ---------- BUTTONS ---------- */
+.centered-box:hover {
+  transform: translateY(-2px);
+}
+
+.centered-box h2 {
+  color: var(--color-primary);
+  margin-bottom: 1.4rem;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.centered-box p {
+  color: var(--color-muted);
+  font-size: 1rem;
+  margin-top: 0.8rem;
+}
+
+/* ===========================================================
+   BUTTONS
+   =========================================================== */
 button, .btn {
   background-color: var(--color-primary-light);
   color: #ffffff;
@@ -159,7 +203,9 @@ button:active, .btn:active {
   box-shadow: none;
 }
 
-/* ---------- CARDS ---------- */
+/* ===========================================================
+   CARDS
+   =========================================================== */
 .card {
   background-color: var(--color-surface);
   border-radius: var(--radius);
@@ -189,7 +235,9 @@ button:active, .btn:active {
   margin-bottom: 1rem;
 }
 
-/* ---------- FORMS ---------- */
+/* ===========================================================
+   FORMS
+   =========================================================== */
 form {
   display: flex;
   flex-direction: column;
@@ -218,37 +266,9 @@ input:focus, textarea:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
 }
 
-/* ---------- AUTH BOXES ---------- */
-.centered-box {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 2.8rem;
-  max-width: 420px;
-  margin: 6rem auto;
-  text-align: center;
-  transition: background-color var(--transition), transform var(--transition);
-}
-
-.centered-box:hover {
-  transform: translateY(-2px);
-}
-
-.centered-box h2 {
-  color: var(--color-primary);
-  margin-bottom: 1.4rem;
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.centered-box p {
-  color: var(--color-muted);
-  font-size: 1rem;
-  margin-top: 0.8rem;
-}
-
-/* ---------- LISTS ---------- */
+/* ===========================================================
+   LISTS
+   =========================================================== */
 ul {
   list-style: none;
   padding: 0;
@@ -271,15 +291,37 @@ li:hover {
   transform: translateX(3px);
 }
 
-/* ---------- RESPONSIVE ---------- */
+/* ===========================================================
+   FOOTER
+   =========================================================== */
+.site-footer {
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.site-footer p {
+  margin: 0;
+  color: #ffffff;
+}
+
+/* ===========================================================
+   RESPONSIVE
+   =========================================================== */
 @media (max-width: 768px) {
-  header {
+  .header-inner {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.8rem;
   }
 
-  nav a {
+  .nav-links a {
     margin: 0 0.8rem 0 0;
   }
 
@@ -290,5 +332,9 @@ li:hover {
   .centered-box {
     margin: 3rem 1rem;
     padding: 2rem;
+  }
+
+  .logo a.home-link {
+    font-size: 1.7rem;
   }
 }
