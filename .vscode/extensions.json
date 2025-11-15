@@ -2,7 +2,6 @@
   "recommendations": [
     "ms-python.python",
     "ms-python.debugpy",
-    "batisteo.vscode-django",
     "littlefoxteam.vscode-django-snippets",
     "ms-python.black-formatter",
     "ms-python.isort",
