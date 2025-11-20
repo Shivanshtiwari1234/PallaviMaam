@@ -2,37 +2,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".site-header");
   const cards = document.querySelectorAll(".card, .centered-box");
 
-  /* ---------- Gentle Fade-in ---------- */
+  /* ---------- Super Smooth Cinematic Fade-in ---------- */
   document.querySelectorAll(".fade-in").forEach((el, i) => {
     el.style.opacity = "0";
-    el.style.transform = "translateY(20px)";
+    el.style.transform = "translateY(40px)";
     setTimeout(() => {
-      el.style.transition = "opacity 1.8s ease-out, transform 1.8s ease-out";
+      el.style.transition =
+        "opacity 2.4s cubic-bezier(.19,1,.22,1), " +
+        "transform 2.4s cubic-bezier(.19,1,.22,1)";
       el.style.opacity = "1";
+    }, 400 + i * 350); // slower stagger
+    setTimeout(() => {
       el.style.transform = "translateY(0)";
-    }, 250 + i * 220);
+    }, 450 + i * 350);
   });
 
-  /* ---------- Cinematic Depth Parallax (very smooth) ---------- */
+  /* ---------- Extremely Smooth Parallax Depth ---------- */
   let ticking = false;
-
   window.addEventListener("scroll", () => {
     if (!ticking) {
       window.requestAnimationFrame(() => {
         const scrollY = window.scrollY;
 
-        // Header blur and padding — slow fade
-        header.style.transition = "backdrop-filter 1.2s ease, padding 1.2s ease";
-        header.style.backdropFilter = scrollY > 10 ? "blur(10px)" : "none";
-        header.style.padding = scrollY > 40 ? "1rem 2rem" : "1.8rem 3rem";
+        // Header cinematic animation
+        header.style.transition = "padding 1.8s ease, backdrop-filter 2s ease";
+        header.style.backdropFilter = scrollY > 10 ? "blur(14px)" : "blur(0px)";
+        header.style.padding = scrollY > 40 ? "1.3rem 2rem" : "2.6rem 3.4rem";
 
-        // Very soft card depth — tilt and scale
+        // Addictive slow parallax effect on cards
         cards.forEach((card) => {
           const rect = card.getBoundingClientRect();
           const offset = (rect.top / window.innerHeight - 0.5) * 2;
           const depth = Math.max(-1, Math.min(1, offset));
-          card.style.transform = `scale(${1 + depth * 0.008}) rotateX(${depth * 1.5}deg)`;
-          card.style.transition = "transform 1.5s ease-out";
+
+          card.style.transition = "transform 2.6s cubic-bezier(.19,1,.22,1)";
+          card.style.transform =
+            `scale(${1 + depth * 0.01}) rotateX(${depth * 2}deg)`;
         });
 
         ticking = false;

@@ -7,13 +7,18 @@
   --color-text: #0f172a;
   --color-muted: #475569;
   --color-border: #cbd5e1;
+
   --radius: 14px;
   --shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
   --shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.12);
   --transition: 0.4s ease;
+
   --max-width: 1250px;
-  --section-spacing: 5rem;
+
+  /* MORE INTERNAL SPACING */
+  --section-spacing: 8rem; /* was 5rem */
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-primary: #60a5fa;
@@ -26,25 +31,28 @@
     --color-border: #334155;
   }
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html, body {
   height: 100%;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
 body {
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   display: flex;
   flex-direction: column;
-  line-height: 1.8;
-  letter-spacing: 0.2px;
+  line-height: 1.85;
+  letter-spacing: 0.25px;
 }
 
 /* ---------- HEADER ---------- */
@@ -52,7 +60,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem 3rem;
+
+  /* MORE SPACING */
+  padding: 3rem 4rem; /* was 2rem 3rem */
+
   background: linear-gradient(90deg, #002b8a, #1d4ed8);
   position: sticky;
   top: 0;
@@ -61,51 +72,38 @@ body {
   transition: background 1.2s ease, padding 0.4s ease, backdrop-filter 0.4s ease;
   backdrop-filter: blur(0);
 }
+
 .header-inner {
   width: 100%;
   max-width: var(--max-width);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+
+  /* MORE GAP */
+  gap: 3rem; /* was 2rem */
 }
+
 .logo a.home-link {
   font-family: "Outfit", sans-serif;
   font-weight: 800;
-  font-size: 2.2rem;
+  font-size: 2.4rem; /* slightly bigger */
   color: #ffffff;
   text-decoration: none;
   text-transform: uppercase;
   transition: opacity 0.3s ease, text-shadow 0.6s ease;
 }
-.logo a.home-link:hover {
-  opacity: 0.9;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6),
-               0 0 18px rgba(59, 130, 246, 0.5);
-}
+
 .nav-links a {
   color: #e0e7ff;
   font-weight: 500;
   text-decoration: none;
-  margin-left: 2.2rem;
+
+  /* MORE SIDE SPACING */
+  margin-left: 3rem; /* was 2.2rem */
+
   position: relative;
   transition: color 0.3s ease;
-}
-.nav-links a:hover {
-  color: #ffffff;
-}
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0%;
-  height: 2px;
-  background: white;
-  transition: width 0.35s ease;
-}
-.nav-links a:hover::after {
-  width: 100%;
 }
 
 /* ---------- MAIN ---------- */
@@ -113,10 +111,15 @@ main {
   flex: 1;
   width: 100%;
   max-width: var(--max-width);
+
   margin: 0 auto;
-  padding: calc(var(--section-spacing) / 1.2) 3rem;
+
+  /* MORE PADDING */
+  padding: calc(var(--section-spacing)) 4rem; /* was /1.2 and 3rem */
+
   perspective: 1000px;
 }
+
 section {
   margin-bottom: var(--section-spacing);
 }
@@ -127,121 +130,83 @@ section {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 4.2rem 3.5rem;
-  max-width: 500px;
-  margin: 7rem auto;
+
+  /* MORE INTERNAL SPACING */
+  padding: 5.2rem 4.5rem; /* was 4.2rem 3.5rem */
+
+  max-width: 550px; /* slightly larger */
+
+  /* MORE OUTER SPACING */
+  margin: 9rem auto; /* was 7rem */
+
   text-align: center;
   transition: transform var(--transition), box-shadow var(--transition);
   will-change: transform;
 }
-.centered-box:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: var(--shadow-hover);
-}
-.centered-box h2 {
-  color: var(--color-primary);
-  margin-bottom: 1.8rem;
-  font-size: 2.3rem;
-  font-weight: 800;
-}
-.centered-box p {
-  color: var(--color-muted);
-  font-size: 1.1rem;
-  margin-top: 1.2rem;
-  line-height: 1.85;
-}
+
 .card {
   background-color: var(--color-surface);
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
-  padding: 3rem 2.8rem;
-  margin-bottom: 3rem;
+
+  /* MORE PADDING */
+  padding: 4rem 3.5rem; /* was 3rem 2.8rem */
+
+  /* MORE OUTER SPACING */
+  margin-bottom: 4rem; /* was 3rem */
+
   box-shadow: var(--shadow);
   transition: transform var(--transition), box-shadow var(--transition);
   will-change: transform;
 }
-.card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: var(--shadow-hover);
-}
+
 .card h3 {
-  color: var(--color-primary);
-  margin-bottom: 1.2rem;
-  font-size: 1.6rem;
-  font-weight: 700;
+  margin-bottom: 1.8rem; /* was 1.2rem */
 }
+
 .card p {
-  color: var(--color-muted);
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.85;
+  margin-bottom: 2rem; /* was 1.5rem */
+  line-height: 1.9;
 }
 
 /* ---------- BUTTONS ---------- */
 button, .btn {
-  background-color: var(--color-primary-light);
-  color: #ffffff;
-  border: none;
-  border-radius: var(--radius);
-  padding: 1.2rem 2.4rem;
-  font-weight: 700;
-  font-size: 1.1rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.7px;
-  transition: all var(--transition);
-  display: inline-block;
-  text-decoration: none;
-}
-button:hover, .btn:hover {
-  background-color: var(--color-primary);
-  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.45);
-  transform: translateY(-3px) scale(1.03);
-}
-button:focus-visible, .btn:focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 5px;
-}
-button:active, .btn:active {
-  transform: translateY(0);
-  box-shadow: none;
+  padding: 1.5rem 3rem; /* was 1.2rem 2.4rem */
+  font-size: 1.15rem;
+  border-radius: calc(var(--radius) + 2px);
+  letter-spacing: 1px;
 }
 
 /* ---------- FOOTER ---------- */
 .site-footer {
-  width: 100%;
-  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  color: #ffffff;
-  text-align: center;
-  padding: 2rem 0;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.06);
+  padding: 3rem 0; /* was 2rem */
   margin-top: var(--section-spacing);
 }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
   .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    gap: 1.8rem; /* slightly more */
   }
+
   .nav-links a {
-    margin: 0 1rem 0 0;
+    margin: 0 1.4rem 0 0; /* increased */
   }
+
   main {
-    padding: 2rem 1.5rem;
+    padding: 3rem 2rem; /* more */
   }
+
   .centered-box {
-    margin: 4rem 1.2rem;
-    padding: 3rem 2.5rem;
+    margin: 5rem 1.4rem;
+    padding: 3.6rem 2.8rem;
   }
+
   .card {
-    padding: 2.2rem;
+    padding: 3rem 2.4rem;
   }
+
   .logo a.home-link {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
 }
