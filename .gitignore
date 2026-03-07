@@ -3,6 +3,8 @@
 .env
 media/
 LearnEng/media/
+LearnEng/staticfiles/*
+!LearnEng/staticfiles/.gitkeep
 
 # Python cache/build artifacts
 __pycache__/
