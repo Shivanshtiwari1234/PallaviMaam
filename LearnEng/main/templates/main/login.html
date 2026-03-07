@@ -7,37 +7,19 @@
 
   <form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
+    {{ form.non_field_errors }}
 
-    <!-- Username -->
-    <label for="username">Username</label>
-    <input
-      type="text"
-      id="username"
-      name="username"
-      placeholder="Enter your username"
-      required
-    >
+    <label for="id_username">Username</label>
+    {{ form.username }}
 
-    <!-- Password -->
-    <label for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      name="password"
-      placeholder="Enter your password"
-      required
-    >
+    <label for="id_password">Password</label>
+    {{ form.password }}
 
-    <!-- Submit -->
     <button type="submit" class="btn">Login</button>
-
-    {% if error %}
-      <p style="color: red; margin-top: 1rem;">Invalid username or password. Please try again.</p>
-    {% endif %}
   </form>
 
   <p class="mt-4">
-    Don’t have an account?
+    Do not have an account?
     <a href="{% url 'register' %}" style="color: var(--color-primary-light); text-decoration: underline;">
       Register here
     </a>

@@ -1,6 +1,6 @@
-# Developer Documentation — LearnEng
+# Developer Documentation - LearnEng
 
-## ⚙️ Development Setup
+## Development Setup
 
 ```bash
 git clone https://github.com/Shivanshtiwari1234/PallaviMaam.git
@@ -11,9 +11,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
----
-
-## 🌿 Branching Strategy
+## Branching Strategy
 
 ```
 main            # stable
@@ -23,36 +21,28 @@ fix/...         # bug fixes
 docs/...        # documentation
 ```
 
----
-
-## 🎨 Coding Conventions
+## Coding Conventions
 
 - PEP8
-- black & isort
+- black and isort
 - class-based views preferred
 - templates in `/templates/app/`
 - static files in `/static/app/`
 
----
-
-## 🧪 Running Tests
+## Running Tests
 
 ```bash
 python manage.py test
 ```
 
----
-
-## 📦 Adding Dependencies
+## Adding Dependencies
 
 ```bash
 pip install package
 pip freeze > requirements.txt
 ```
 
----
-
-## 👨‍💻 Maintainer
+## Maintainer
 
 **Shivansh Tiwari**
 GitHub: https://github.com/Shivanshtiwari1234

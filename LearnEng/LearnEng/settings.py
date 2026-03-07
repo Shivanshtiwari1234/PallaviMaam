@@ -1,16 +1,15 @@
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
-load_dotenv()
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".." / ".env")
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = os.getenv("DEBUG") == "True"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-local-dev-key")
+DEBUG = os.getenv("DEBUG", "False").lower() in {"1", "true", "yes"}
+ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host.strip()]
 
-# Installed apps
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -21,7 +20,6 @@ INSTALLED_APPS = [
     "main",
 ]
 
-# Middleware
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -32,10 +30,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# URL config
 ROOT_URLCONF = "LearnEng.urls"
 
-# Templates
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -54,7 +50,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "LearnEng.wsgi.application"
 
-# Database
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -77,16 +72,16 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
-# Static files (CSS, JS)
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "main" / "static"]
 
-# Media files (uploads)
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "main" / "static" / "main" / "media"
+MEDIA_ROOT = BASE_DIR / "media"
 
-# Default primary key field type
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "lessons"
+LOGOUT_REDIRECT_URL = "index"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

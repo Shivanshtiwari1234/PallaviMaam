@@ -1,0 +1,17 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: learneng-web
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1,localhost,0.0.0.0}
+      DEBUG: ${DEBUG:-False}
+      SECRET_KEY: ${SECRET_KEY:-django-insecure-docker-local-key}
+    volumes:
+      - ./LearnEng:/app/LearnEng
+    restart: unless-stopped

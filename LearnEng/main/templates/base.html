@@ -2,25 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- ===== META ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Learn English{% endblock %}</title>
-
-    <!-- ===== FONTS ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- ===== STYLES ===== -->
     <link rel="stylesheet" href="{% static 'main/styles.css' %}" />
   </head>
 
   <body>
-    <!-- ===== HEADER ===== -->
     <header class="site-header fade-in">
       <div class="header-inner">
         <h1 class="logo fade-in">
@@ -33,7 +27,7 @@
           {% if user.is_authenticated %}
           <a href="{% url 'lessons' %}" class="fade-in">Lessons</a>
 
-          {% if user.is_superuser %}
+          {% if user.is_staff %}
           <a href="{% url 'manage_lessons' %}" class="fade-in">Manage Lessons</a>
           {% endif %}
 
@@ -47,24 +41,28 @@
       </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main id="main-content" class="fade-in">
+      {% if messages %}
+      <section class="centered-box">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      </section>
+      {% endif %}
+
       {% block content %}
       <section class="centered-box fade-in">
         <h2 class="fade-in">Welcome to Learn English</h2>
         <p class="fade-in">Master English through interactive lessons and cinematic experiences.</p>
-
         <a href="{% url 'lessons' %}" class="btn fade-in">Get Started</a>
       </section>
       {% endblock %}
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="site-footer fade-in">
-      <p>© 2025 Shivanshtiwari1234 — All rights reserved.</p>
+      <p>&copy; 2026 ShivanshTiwari1234 - All rights reserved.</p>
     </footer>
 
-    <!-- ===== SCRIPTS ===== -->
     <script src="{% static 'main/interactive.js' %}"></script>
   </body>
 </html>
