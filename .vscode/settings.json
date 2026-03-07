@@ -1,9 +1,7 @@
 {
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
   "python.terminal.activateEnvironment": true,
-  "python.analysis.extraPaths": [
-    "${workspaceFolder}"
-  ],
+  "python.analysis.extraPaths": ["${workspaceFolder}"],
   "python.analysis.autoImportCompletions": true,
   "python.envFile": "${workspaceFolder}/.env",
   "editor.formatOnSave": true,
@@ -24,5 +22,6 @@
   },
   "files.associations": {
     "**/templates/**/*.html": "django-html"
-  }
+  },
+  "python-envs.defaultEnvManager": "ms-python.python:system"
 }
