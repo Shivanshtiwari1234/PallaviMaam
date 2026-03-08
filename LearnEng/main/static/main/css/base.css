@@ -28,6 +28,22 @@ a {
   color: inherit;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0.5rem;
+  z-index: 100;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--color-primary-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+}
+
 .js-motion-enabled .fade-in {
   opacity: 0;
   transform: translateY(12px);

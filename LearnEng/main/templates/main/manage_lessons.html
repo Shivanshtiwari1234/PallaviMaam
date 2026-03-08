@@ -2,34 +2,38 @@
 {% block title %}Manage Lessons{% endblock %}
 
 {% block content %}
-<div class="centered-box">
-  <h2>Manage Lessons</h2>
+{% include "partials/page_header.html" with title="Manage Lessons" subtitle="Add new lessons and monitor updates instantly." %}
+<section class="split-layout page-section">
+  <div class="panel">
+    <h2>Add Lesson</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
 
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
+      <label for="id_title">Title</label>
+      {{ form.title }}
 
-    <label for="id_title">Title</label>
-    {{ form.title }}
+      <label for="id_description">Description</label>
+      {{ form.description }}
 
-    <label for="id_description">Description</label>
-    {{ form.description }}
+      <label for="id_video">Video File</label>
+      {{ form.video }}
 
-    <label for="id_video">Video File</label>
-    {{ form.video }}
+      <button type="submit" class="btn">Add Lesson</button>
+    </form>
+  </div>
 
-    <button type="submit" class="btn">Add Lesson</button>
-  </form>
-
-  <h3 class="subsection-title">Existing Lessons</h3>
-  <ul id="manage-lessons-list">
-    {% for lesson in lessons %}
-      <li data-lesson-id="{{ lesson.id }}">{{ lesson.title }}</li>
-    {% empty %}
-      <li id="manage-lessons-empty">No lessons yet.</li>
-    {% endfor %}
-  </ul>
-</div>
+  <div class="panel">
+    <h2>Existing Lessons</h2>
+    <ul id="manage-lessons-list">
+      {% for lesson in lessons %}
+        <li data-lesson-id="{{ lesson.id }}">{{ lesson.title }}</li>
+      {% empty %}
+        <li id="manage-lessons-empty">No lessons yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
 {% if latest_lesson_payload %}
   {{ latest_lesson_payload|json_script:"latest-lesson-payload" }}
 {% endif %}

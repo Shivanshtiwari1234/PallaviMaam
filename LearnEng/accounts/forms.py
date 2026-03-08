@@ -2,14 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
-
-class StyledFieldsMixin:
-    default_widget_class = "w-full p-2 rounded border"
-
-    def _apply_widget_classes(self):
-        for field in self.fields.values():
-            css = field.widget.attrs.get("class", "")
-            field.widget.attrs["class"] = f"{css} {self.default_widget_class}".strip()
+from common.forms import StyledFieldsMixin
 
 
 class RegisterForm(StyledFieldsMixin, UserCreationForm):
@@ -21,10 +14,22 @@ class RegisterForm(StyledFieldsMixin, UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["username"].widget.attrs.update(
+            {"autocomplete": "username", "autocapitalize": "none", "spellcheck": "false"}
+        )
+        self.fields["email"].widget.attrs.update(
+            {"autocomplete": "email", "inputmode": "email", "autocapitalize": "none"}
+        )
+        self.fields["password1"].widget.attrs.update({"autocomplete": "new-password"})
+        self.fields["password2"].widget.attrs.update({"autocomplete": "new-password"})
         self._apply_widget_classes()
 
 
 class LoginForm(StyledFieldsMixin, AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["username"].widget.attrs.update(
+            {"autocomplete": "username", "autocapitalize": "none", "spellcheck": "false"}
+        )
+        self.fields["password"].widget.attrs.update({"autocomplete": "current-password"})
         self._apply_widget_classes()

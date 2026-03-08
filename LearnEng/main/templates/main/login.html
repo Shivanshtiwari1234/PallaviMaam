@@ -2,8 +2,10 @@
 {% block title %}Login - Learn English{% endblock %}
 
 {% block content %}
-<div class="centered-box">
-  <h2>Login</h2>
+{% include "partials/page_header.html" with title="Login" subtitle="Continue where you left off." %}
+<section class="page-section">
+<div class="centered-box auth-box">
+  <h2>Welcome Back</h2>
 
   <form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
@@ -25,4 +27,5 @@
     </a>
   </p>
 </div>
+</section>
 {% endblock %}

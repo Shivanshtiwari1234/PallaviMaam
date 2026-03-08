@@ -2,7 +2,9 @@
 {% block title %}Register - Learn English{% endblock %}
 
 {% block content %}
-<div class="centered-box">
+{% include "partials/page_header.html" with title="Create Account" subtitle="Join and start learning with structured lessons." %}
+<section class="page-section">
+<div class="centered-box auth-box">
   <h2>Create an Account</h2>
 
   <form method="POST">
@@ -29,4 +31,5 @@
     <a href="{% url 'login' %}" class="text-link">Login</a>
   </p>
 </div>
+</section>
 {% endblock %}

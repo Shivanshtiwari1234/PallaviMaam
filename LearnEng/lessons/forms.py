@@ -1,16 +1,7 @@
 from django import forms
 
+from common.forms import StyledFieldsMixin
 from main.models import Lesson
-
-
-class StyledFieldsMixin:
-    default_widget_class = "w-full p-2 rounded border"
-
-    def _apply_widget_classes(self):
-        for field in self.fields.values():
-            css = field.widget.attrs.get("class", "")
-            field.widget.attrs["class"] = f"{css} {self.default_widget_class}".strip()
-
 
 class LessonForm(StyledFieldsMixin, forms.ModelForm):
     class Meta:
@@ -23,4 +14,6 @@ class LessonForm(StyledFieldsMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["title"].widget.attrs.update({"maxlength": "255"})
+        self.fields["description"].widget.attrs.update({"maxlength": "2000"})
         self._apply_widget_classes()

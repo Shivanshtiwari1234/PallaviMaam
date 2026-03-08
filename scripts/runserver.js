@@ -1,6 +1,6 @@
 const { spawn } = require("child_process");
-const fs = require("fs");
 const path = require("path");
+const { resolvePythonExecutable } = require("./lib/python");
 
 const rootDir = path.resolve(__dirname, "..");
 const djangoDir = path.join(rootDir, "LearnEng");
@@ -9,19 +9,7 @@ const host = process.env.HOST || "127.0.0.1";
 const socketPort = process.env.SOCKET_PORT || "5050";
 const subdomain = process.env.LT_SUBDOMAIN;
 
-const pythonCandidates = [
-  path.join(rootDir, ".venv", "Scripts", "python.exe"),
-  path.join(rootDir, ".venv", "bin", "python"),
-  "python",
-  "python3",
-];
-
-const pythonExec = pythonCandidates.find((candidate) => {
-  if (candidate.includes(path.sep)) {
-    return fs.existsSync(candidate);
-  }
-  return true;
-});
+const pythonExec = resolvePythonExecutable(rootDir);
 
 if (!pythonExec) {
   console.error("No Python executable found. Create/activate .venv first.");

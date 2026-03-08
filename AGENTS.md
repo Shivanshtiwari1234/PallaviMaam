@@ -13,8 +13,9 @@ This repository hosts a Django app (`LearnEng`) with a Node helper runtime for l
 - `LearnEng/` Django project root (`manage.py`, apps, templates, static)
 - `LearnEng/core/` Core views and runtime context processor
 - `LearnEng/accounts/` Authentication forms/views/routes
-- `LearnEng/lessons/` Lesson CRUD/listing views/forms/routes
+- `LearnEng/lessons/` Lesson CRUD/listing views/forms/routes/services
 - `LearnEng/main/` Compatibility layer and shared templates/static assets
+- `LearnEng/common/` Shared reusable modules (for example form mixins)
 - `LearnEng/main/static/main/css/` Modular CSS files (`tokens`, `base`, `layout`, `components`, `pages`)
 - `scripts/runserver.js` Starts Django + Socket.IO server + localtunnel
 - `scripts/socket-server.js` Socket.IO relay server

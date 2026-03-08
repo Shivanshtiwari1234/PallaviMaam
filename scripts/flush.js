@@ -1,23 +1,10 @@
 const { spawnSync } = require("child_process");
-const fs = require("fs");
 const path = require("path");
+const { resolvePythonExecutable } = require("./lib/python");
 
 const rootDir = path.resolve(__dirname, "..");
 const djangoDir = path.join(rootDir, "LearnEng");
-
-const pythonCandidates = [
-  path.join(rootDir, ".venv", "Scripts", "python.exe"),
-  path.join(rootDir, ".venv", "bin", "python"),
-  "python",
-  "python3",
-];
-
-const pythonExec = pythonCandidates.find((candidate) => {
-  if (candidate.includes(path.sep)) {
-    return fs.existsSync(candidate);
-  }
-  return true;
-});
+const pythonExec = resolvePythonExecutable(rootDir);
 
 if (!pythonExec) {
   console.error("No Python executable found. Create/activate .venv first.");
@@ -31,4 +18,3 @@ const result = spawnSync(pythonExec, ["manage.py", "flush", "--noinput"], {
 });
 
 process.exit(result.status ?? 1);
-

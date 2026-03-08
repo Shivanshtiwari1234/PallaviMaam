@@ -56,6 +56,12 @@ button:hover,
   box-shadow: var(--shadow-xs);
 }
 
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
 .card h3 {
   margin: 0 0 var(--space-2);
 }
@@ -98,6 +104,25 @@ button:hover,
   color: var(--color-muted);
 }
 
+.panel {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.panel h2,
+.panel h3 {
+  margin: 0 0 var(--space-2);
+  font-family: "Outfit", "Segoe UI", sans-serif;
+  color: var(--color-primary-strong);
+}
+
+.auth-box {
+  max-width: 560px;
+}
+
 #main-content > .centered-box:first-child p {
   margin: 0.35rem 0;
   padding: 0.7rem 0.8rem;
@@ -117,5 +142,11 @@ button:hover,
   .btn,
   button {
     width: 100%;
+  }
+}
+
+@media (min-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

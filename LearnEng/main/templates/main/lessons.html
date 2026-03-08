@@ -2,20 +2,22 @@
 {% block title %}Lessons - Learn English{% endblock %}
 
 {% block content %}
-<h2 class="section-title">Lessons</h2>
-<div id="lessons-feed">
-{% for lesson in lessons %}
-  <div class="card" data-lesson-id="{{ lesson.id }}">
-    <h3>{{ lesson.title }}</h3>
-    <p>{{ lesson.description }}</p>
-    {% if lesson.video %}
-      <video controls>
-        <source src="{{ lesson.video.url }}" type="video/mp4">
-      </video>
-    {% endif %}
+{% include "partials/page_header.html" with title="Lessons" subtitle="Explore the latest uploaded courses in real time." %}
+<section class="page-section">
+  <div id="lessons-feed" class="cards-grid">
+  {% for lesson in lessons %}
+    <article class="card" data-lesson-id="{{ lesson.id }}">
+      <h3>{{ lesson.title }}</h3>
+      <p>{{ lesson.description }}</p>
+      {% if lesson.video %}
+        <video controls>
+          <source src="{{ lesson.video.url }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </article>
+  {% empty %}
+    <p class="empty-state" id="lessons-empty-state">No lessons available yet.</p>
+  {% endfor %}
   </div>
-{% empty %}
-  <p class="empty-state" id="lessons-empty-state">No lessons available yet.</p>
-{% endfor %}
-</div>
+</section>
 {% endblock %}
