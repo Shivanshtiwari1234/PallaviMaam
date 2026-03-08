@@ -7,11 +7,15 @@
   "scripts": {
     "start": "node scripts/runserver.js",
     "socket": "node scripts/socket-server.js",
+    "build:frontend": "tsc -p tsconfig.frontend.json",
     "flush": "node scripts/flush.js",
     "su": "node scripts/su.js"
   },
   "dependencies": {
     "http-proxy": "^1.18.1",
     "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
   }
 }

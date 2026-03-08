@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["DOM", "ES2019"],
+    "module": "none",
+    "rootDir": "frontend-ts",
+    "outDir": "LearnEng/main/static/main",
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true
+  },
+  "include": ["frontend-ts/**/*.ts"]
+}
