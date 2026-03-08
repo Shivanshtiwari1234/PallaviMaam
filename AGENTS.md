@@ -17,8 +17,8 @@ This repository hosts a Django app (`LearnEng`) with a Node helper runtime for l
 - `LearnEng/main/` Compatibility layer and shared templates/static assets
 - `LearnEng/common/` Shared reusable modules (for example form mixins)
 - `LearnEng/main/static/main/css/` Modular CSS files (`tokens`, `base`, `layout`, `components`, `pages`)
-- `scripts/runserver.js` Starts Django + Socket.IO server + localtunnel
-- `scripts/socket-server.js` Socket.IO relay server
+- `scripts/runserver.js` Starts Django (internal), Node gateway (public), and localtunnel
+- `scripts/socket-server.js` Public gateway (Socket.IO + reverse proxy to Django)
 - `scripts/flush.js` Runs `manage.py flush --noinput`
 - `scripts/su.js` Runs `manage.py createsuperuser`
 
@@ -44,13 +44,15 @@ This repository hosts a Django app (`LearnEng`) with a Node helper runtime for l
 ## Environment Variables
 - `DEBUG`, `SECRET_KEY`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`
 - `SOCKET_IO_URL` (Django template runtime config; default `http://127.0.0.1:5050`)
-- `SOCKET_PORT` (Node Socket.IO server port; default `5050`)
-- `PORT`, `HOST` (Django bind for `scripts/runserver.js`; defaults `8000`, `127.0.0.1`)
+- `SOCKET_PORT` (public gateway port; defaults to `PORT`)
+- `PORT`, `HOST` (public gateway bind for `scripts/runserver.js`; defaults `8000`, `127.0.0.1`)
+- `DJANGO_PORT` (internal Django port; default `8001`)
 - `LT_SUBDOMAIN` (optional localtunnel subdomain)
 
 ## Realtime Design Notes
 - Client script: `LearnEng/main/static/main/realtime.js`
 - Socket server: `scripts/socket-server.js`
+- Public URL and Socket.IO share the same origin/port through the Node gateway.
 - `manage_lessons` stores the most recently created lesson in session and emits payload on page load.
 - Lessons pages listen for `lesson:created` and prepend new items without reload.
 

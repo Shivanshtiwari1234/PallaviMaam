@@ -75,7 +75,7 @@
   }
 
   function initSocket() {
-    const socketUrl = (window.APP_CONFIG && window.APP_CONFIG.socketUrl) || "http://127.0.0.1:5050";
+    const socketUrl = (window.APP_CONFIG && window.APP_CONFIG.socketUrl) || window.location.origin;
     if (typeof window.io !== "function") return null;
 
     const socket = window.io(socketUrl, {

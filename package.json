@@ -11,6 +11,7 @@
     "su": "node scripts/su.js"
   },
   "dependencies": {
+    "http-proxy": "^1.18.1",
     "socket.io": "^4.8.1"
   }
 }

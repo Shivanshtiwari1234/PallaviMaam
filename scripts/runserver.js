@@ -5,11 +5,9 @@ const { resolvePythonExecutable } = require("./lib/python");
 const rootDir = path.resolve(__dirname, "..");
 const djangoDir = path.join(rootDir, "LearnEng");
 const port = process.env.PORT || "8000";
+const djangoPort = process.env.DJANGO_PORT || "8001";
 const host = process.env.HOST || "127.0.0.1";
-const socketPort = process.env.SOCKET_PORT || "5050";
 const subdomain = process.env.LT_SUBDOMAIN;
-const socketCorsOrigin =
-  process.env.SOCKET_CORS_ORIGIN || `http://${host}:${port},http://localhost:${port},http://127.0.0.1:${port}`;
 
 const pythonExec = resolvePythonExecutable(rootDir);
 
@@ -72,8 +70,8 @@ const socketServer = spawn("node", [path.join(__dirname, "socket-server.js")], {
   windowsHide: true,
   env: {
     ...process.env,
-    SOCKET_PORT: String(socketPort),
-    SOCKET_CORS_ORIGIN: socketCorsOrigin,
+    SOCKET_PORT: String(port),
+    DJANGO_TARGET: `http://${host}:${djangoPort}`,
   },
 });
 children.push(socketServer);
@@ -91,10 +89,10 @@ socketServer.on("exit", (code) => {
   }
 });
 
-console.log(`[config] Django: http://${host}:${port}`);
-console.log(`[config] Socket.IO: http://${host}:${socketPort}`);
+console.log(`[config] Public URL: http://${host}:${port}`);
+console.log(`[config] Django internal: http://${host}:${djangoPort}`);
 
-const djangoArgs = ["manage.py", "runserver", `${host}:${port}`];
+const djangoArgs = ["manage.py", "runserver", `${host}:${djangoPort}`];
 const server = spawn(pythonExec, djangoArgs, {
   cwd: djangoDir,
   shell: false,

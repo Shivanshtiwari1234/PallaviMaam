@@ -1,37 +1,36 @@
 const http = require("http");
 const crypto = require("crypto");
+const httpProxy = require("http-proxy");
 const { Server } = require("socket.io");
 
-const socketPort = Number(process.env.SOCKET_PORT || 5050);
-const corsOrigin = process.env.SOCKET_CORS_ORIGIN || "http://127.0.0.1:8000,http://localhost:8000";
+const socketPort = Number(process.env.SOCKET_PORT || 8000);
+const djangoTarget = process.env.DJANGO_TARGET || "http://127.0.0.1:8001";
 const socketEventSecret = process.env.SOCKET_EVENT_SECRET || process.env.SECRET_KEY || "";
+const proxy = httpProxy.createProxyServer({
+  target: djangoTarget,
+  changeOrigin: false,
+  ws: true,
+});
 
-const allowedOrigins = corsOrigin
-  .split(",")
-  .map((item) => item.trim())
-  .filter(Boolean);
+proxy.on("error", (err, req, res) => {
+  if (res && !res.headersSent) {
+    res.writeHead(502, { "Content-Type": "text/plain" });
+  }
+  if (res && !res.writableEnded) {
+    res.end("Upstream Django server is unavailable");
+  }
+  console.error(`[proxy] ${req && req.url ? req.url : "request"}: ${err.message}`);
+});
 
 const server = http.createServer((req, res) => {
-  if (req.url === "/health") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ status: "ok" }));
+  if (req.url && req.url.startsWith("/socket.io/")) {
     return;
   }
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Socket.IO server is running");
+  proxy.web(req, res);
 });
 
 const io = new Server(server, {
-  cors: {
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-        return;
-      }
-      callback(new Error("Origin not allowed by Socket.IO CORS policy"));
-    },
-    methods: ["GET", "POST"],
-  },
+  path: "/socket.io",
 });
 
 function sanitizeLessonPayload(payload) {
@@ -84,8 +83,15 @@ io.on("connection", (socket) => {
   });
 });
 
+server.on("upgrade", (req, socket, head) => {
+  if (req.url && req.url.startsWith("/socket.io/")) {
+    return;
+  }
+  proxy.ws(req, socket, head);
+});
+
 server.listen(socketPort, () => {
-  console.log(`Socket.IO listening on http://127.0.0.1:${socketPort}`);
+  console.log(`Gateway listening on http://127.0.0.1:${socketPort} -> ${djangoTarget}`);
   if (!socketEventSecret) {
     console.warn("Socket event secret is missing. lesson:created events will be rejected.");
   }
