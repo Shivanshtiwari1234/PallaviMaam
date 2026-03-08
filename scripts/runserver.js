@@ -2,7 +2,7 @@ const { spawn } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-const rootDir = __dirname;
+const rootDir = path.resolve(__dirname, "..");
 const djangoDir = path.join(rootDir, "LearnEng");
 const port = process.env.PORT || "8000";
 const host = process.env.HOST || "127.0.0.1";
@@ -76,7 +76,7 @@ function startTunnel() {
   });
 }
 
-const socketServer = spawn("node", ["socket-server.js"], {
+const socketServer = spawn("node", [path.join(__dirname, "socket-server.js")], {
   cwd: rootDir,
   shell: true,
   windowsHide: true,

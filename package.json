@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "description": "Runtime scripts for Django + localtunnel + Socket.IO realtime updates",
-  "main": "runserver.js",
+  "main": "scripts/runserver.js",
   "scripts": {
-    "start": "node runserver.js",
-    "socket": "node socket-server.js"
+    "start": "node scripts/runserver.js",
+    "socket": "node scripts/socket-server.js",
+    "flush": "node scripts/flush.js",
+    "su": "node scripts/su.js"
   },
   "dependencies": {
     "socket.io": "^4.8.1"
   }
 }
-

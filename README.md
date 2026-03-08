@@ -29,6 +29,15 @@ python manage.py migrate
 python manage.py makemigrations
 ```
 
+## Runtime Scripts
+
+```bash
+npm run start   # Django + Socket.IO + localtunnel
+npm run socket  # Socket.IO server only
+npm run flush   # manage.py flush --noinput
+npm run su      # manage.py createsuperuser
+```
+
 ## Docker
 
 ```bash
