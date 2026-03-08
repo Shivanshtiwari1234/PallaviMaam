@@ -8,6 +8,8 @@ const port = process.env.PORT || "8000";
 const host = process.env.HOST || "127.0.0.1";
 const socketPort = process.env.SOCKET_PORT || "5050";
 const subdomain = process.env.LT_SUBDOMAIN;
+const socketCorsOrigin =
+  process.env.SOCKET_CORS_ORIGIN || `http://${host}:${port},http://localhost:${port},http://127.0.0.1:${port}`;
 
 const pythonExec = resolvePythonExecutable(rootDir);
 
@@ -68,7 +70,11 @@ const socketServer = spawn("node", [path.join(__dirname, "socket-server.js")], {
   cwd: rootDir,
   shell: true,
   windowsHide: true,
-  env: { ...process.env, SOCKET_PORT: String(socketPort) },
+  env: {
+    ...process.env,
+    SOCKET_PORT: String(socketPort),
+    SOCKET_CORS_ORIGIN: socketCorsOrigin,
+  },
 });
 children.push(socketServer);
 pipeOutput(socketServer, "socket");

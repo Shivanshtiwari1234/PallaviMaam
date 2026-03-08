@@ -63,6 +63,17 @@
     }
   }
 
+  function parseLatestLessonSignature() {
+    const signatureEl = document.getElementById("latest-lesson-signature");
+    if (!signatureEl) return null;
+
+    try {
+      return JSON.parse(signatureEl.textContent);
+    } catch (_err) {
+      return null;
+    }
+  }
+
   function initSocket() {
     const socketUrl = (window.APP_CONFIG && window.APP_CONFIG.socketUrl) || "http://127.0.0.1:5050";
     if (typeof window.io !== "function") return null;
@@ -90,9 +101,9 @@
     if (!socket) return;
 
     const latestLesson = parseLatestLessonPayload();
-    if (latestLesson && latestLesson.id) {
-      socket.emit("lesson:created", latestLesson);
+    const latestSignature = parseLatestLessonSignature();
+    if (latestLesson && latestLesson.id && latestSignature) {
+      socket.emit("lesson:created", { lesson: latestLesson, signature: latestSignature });
     }
   });
 })();
-

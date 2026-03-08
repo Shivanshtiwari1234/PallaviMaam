@@ -32,7 +32,10 @@
           <a href="{% url 'manage_lessons' %}" class="fade-in"{% if request.resolver_match.url_name == "manage_lessons" %} aria-current="page"{% endif %}>Manage Lessons</a>
           {% endif %}
 
-          <a href="{% url 'logout' %}" class="fade-in">Logout</a>
+          <form method="post" action="{% url 'logout' %}" class="nav-inline-form fade-in">
+            {% csrf_token %}
+            <button type="submit" class="nav-link-btn">Logout</button>
+          </form>
 
           {% else %}
           <a href="{% url 'login' %}" class="fade-in"{% if request.resolver_match.url_name == "login" %} aria-current="page"{% endif %}>Login</a>

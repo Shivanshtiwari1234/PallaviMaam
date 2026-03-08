@@ -26,10 +26,19 @@ def manage_lessons(request):
         messages.success(request, "Lesson added successfully.")
         return redirect("manage_lessons")
 
-    latest_lesson_payload = latest_lesson_payload_from_session(request.session)
+    latest_lesson_payload = None
+    latest_lesson_signature = None
+    latest_from_session = latest_lesson_payload_from_session(request.session)
+    if latest_from_session:
+        latest_lesson_payload, latest_lesson_signature = latest_from_session
     lessons = list_lessons()
     return render(
         request,
         "main/manage_lessons.html",
-        {"form": form, "lessons": lessons, "latest_lesson_payload": latest_lesson_payload},
+        {
+            "form": form,
+            "lessons": lessons,
+            "latest_lesson_payload": latest_lesson_payload,
+            "latest_lesson_signature": latest_lesson_signature,
+        },
     )

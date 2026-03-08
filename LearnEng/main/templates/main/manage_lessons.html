@@ -36,5 +36,6 @@
 </section>
 {% if latest_lesson_payload %}
   {{ latest_lesson_payload|json_script:"latest-lesson-payload" }}
+  {{ latest_lesson_signature|json_script:"latest-lesson-signature" }}
 {% endif %}
 {% endblock %}

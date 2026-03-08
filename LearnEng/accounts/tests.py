@@ -40,7 +40,8 @@ class TestAuthFlow(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertFalse(User.objects.filter(username="alice2").exists())
-        self.assertContains(response, "The two password fields didn")
+        form = response.context["form"]
+        self.assertIn("password2", form.errors)
 
     def test_authenticated_user_redirected_from_login_and_register(self):
         user = User.objects.create_user(
@@ -56,7 +57,7 @@ class TestAuthFlow(TestCase):
         self.assertRedirects(login_response, reverse("lessons"))
         self.assertRedirects(register_response, reverse("lessons"))
 
-    def test_logout_redirects_to_index(self):
+    def test_logout_post_redirects_to_index(self):
         user = User.objects.create_user(
             username="charlie",
             email="charlie@example.com",
@@ -64,5 +65,16 @@ class TestAuthFlow(TestCase):
         )
         self.client.force_login(user)
 
-        response = self.client.get(reverse("logout"))
+        response = self.client.post(reverse("logout"))
         self.assertRedirects(response, reverse("index"))
+
+    def test_logout_get_is_not_allowed(self):
+        user = User.objects.create_user(
+            username="delta",
+            email="delta@example.com",
+            password="StrongPass123",
+        )
+        self.client.force_login(user)
+
+        response = self.client.get(reverse("logout"))
+        self.assertEqual(response.status_code, 405)

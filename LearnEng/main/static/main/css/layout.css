@@ -51,9 +51,40 @@
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
+.nav-inline-form {
+  margin: 0;
+}
+
+.nav-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.4rem;
+  margin: 0;
+  padding: 0.42rem 0.85rem;
+  border: 0;
+  border-radius: 999px;
+  width: auto;
+  background: transparent;
+  color: #eaf1ff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  box-shadow: none;
+}
+
 .nav-links a:hover {
   background-color: rgba(255, 255, 255, 0.18);
   color: #ffffff;
+}
+
+.nav-link-btn:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  transform: none;
+  box-shadow: none;
 }
 
 .nav-links a[aria-current="page"] {
