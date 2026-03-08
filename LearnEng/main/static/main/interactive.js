@@ -1,52 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".site-header");
-  const cards = document.querySelectorAll(".card, .centered-box");
+  const revealItems = document.querySelectorAll(".fade-in");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Super Smooth Cinematic Fade-in ---------- */
-  document.querySelectorAll(".fade-in").forEach((el, i) => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(40px)";
-    setTimeout(() => {
-      el.style.transition =
-        "opacity 2.4s cubic-bezier(.19,1,.22,1), " +
-        "transform 2.4s cubic-bezier(.19,1,.22,1)";
-      el.style.opacity = "1";
-    }, 400 + i * 350); // slower stagger
-    setTimeout(() => {
-      el.style.transform = "translateY(0)";
-    }, 450 + i * 350);
-  });
+  if (revealItems.length > 0 && !prefersReducedMotion) {
+    document.documentElement.classList.add("js-motion-enabled");
 
-  /* ---------- Extremely Smooth Parallax Depth ---------- */
-  let ticking = false;
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
+    revealItems.forEach((item, index) => {
+      item.style.transitionDelay = `${Math.min(index * 40, 220)}ms`;
+    });
 
-        // Header cinematic animation
-        header.style.transition = "padding 1.8s ease, backdrop-filter 2s ease";
-        header.style.backdropFilter = scrollY > 10 ? "blur(14px)" : "blur(0px)";
-        header.style.padding = scrollY > 40 ? "1.3rem 2rem" : "2.6rem 3.4rem";
-
-        // Addictive slow parallax effect on cards
-        cards.forEach((card) => {
-          const rect = card.getBoundingClientRect();
-          const offset = (rect.top / window.innerHeight - 0.5) * 2;
-          const depth = Math.max(-1, Math.min(1, offset));
-
-          card.style.transition = "transform 2.6s cubic-bezier(.19,1,.22,1)";
-          card.style.transform =
-            `scale(${1 + depth * 0.01}) rotateX(${depth * 2}deg)`;
-        });
-
-        ticking = false;
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
       });
-      ticking = true;
-    }
-  });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
 
-  /* ---------- Accessibility Focus Ring ---------- */
+    revealItems.forEach((item) => {
+      if (item.getBoundingClientRect().top < window.innerHeight * 0.85) {
+        item.classList.add("is-visible");
+      } else {
+        revealObserver.observe(item);
+      }
+    });
+  } else {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+  }
+
+  if (header) {
+    let ticking = false;
+
+    const updateHeaderState = () => {
+      header.classList.toggle("site-header--scrolled", window.scrollY > 8);
+      ticking = false;
+    };
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateHeaderState);
+      }
+    }, { passive: true });
+
+    updateHeaderState();
+  }
+
   let usingKeyboard = false;
   window.addEventListener("keydown", (e) => {
     if (e.key === "Tab") {

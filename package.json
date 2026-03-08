@@ -1,0 +1,15 @@
+{
+  "name": "pallavimaam-realtime",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Runtime scripts for Django + localtunnel + Socket.IO realtime updates",
+  "main": "runserver.js",
+  "scripts": {
+    "start": "node runserver.js",
+    "socket": "node socket-server.js"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1"
+  }
+}
+

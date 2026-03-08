@@ -20,3 +20,4 @@ env/
 # Tooling/editor
 .vscode/
 .pytest_cache/
+node_modules/

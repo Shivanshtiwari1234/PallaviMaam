@@ -63,6 +63,13 @@
       <p>&copy; 2026 ShivanshTiwari1234 - All rights reserved.</p>
     </footer>
 
+    <script>
+      window.APP_CONFIG = {
+        socketUrl: "{{ SOCKET_IO_URL|escapejs }}",
+      };
+    </script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" crossorigin="anonymous"></script>
     <script src="{% static 'main/interactive.js' %}"></script>
+    <script src="{% static 'main/realtime.js' %}"></script>
   </body>
 </html>

@@ -2,11 +2,9 @@
 {% block title %}Home - Learn English{% endblock %}
 
 {% block content %}
-<section style="text-align: center; margin-top: 3rem;">
-  <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary);">
-    Welcome to Learn English!
-  </h2>
-  <p style="max-width: 600px; margin: 0 auto 1.5rem; color: var(--color-muted);">
+<section class="hero-section">
+  <h2 class="hero-title">Welcome to Learn English!</h2>
+  <p class="hero-subtitle">
     Improve your English skills from kids to adults. Sign up today to access all lessons.
   </p>
   {% if not user.is_authenticated %}

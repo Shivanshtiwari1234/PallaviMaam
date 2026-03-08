@@ -1,0 +1,122 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at top right, #dde8ff 0%, transparent 42%),
+    linear-gradient(180deg, #f8faff 0%, #f4f7fc 100%);
+  color: var(--color-text);
+  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+.js-motion-enabled .fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 320ms ease-out,
+    transform 320ms ease-out;
+  will-change: opacity, transform;
+}
+
+.js-motion-enabled .fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section {
+  margin-bottom: var(--space-5);
+}
+
+form {
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-1);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.72rem 0.88rem;
+  background: #fff;
+  color: var(--color-text);
+  font: inherit;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.2);
+}
+
+ul {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+}
+
+ul li {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-text);
+}
+
+ul li + li {
+  margin-top: var(--space-2);
+}
+
+video {
+  width: 100%;
+  border-radius: 12px;
+  background: #000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

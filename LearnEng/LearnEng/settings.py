@@ -65,6 +65,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.runtime_config",
             ],
         },
     },
@@ -118,6 +119,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "lessons"
 LOGOUT_REDIRECT_URL = "index"
+SOCKET_IO_URL = os.getenv("SOCKET_IO_URL", "http://127.0.0.1:5050")
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

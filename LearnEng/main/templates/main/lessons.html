@@ -2,18 +2,20 @@
 {% block title %}Lessons - Learn English{% endblock %}
 
 {% block content %}
-<h2 style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 1rem;">Lessons</h2>
+<h2 class="section-title">Lessons</h2>
+<div id="lessons-feed">
 {% for lesson in lessons %}
-  <div class="card">
-    <h3 style="color: var(--color-primary); margin-bottom: 0.5rem;">{{ lesson.title }}</h3>
-    <p style="color: var(--color-muted); margin-bottom: 1rem;">{{ lesson.description }}</p>
+  <div class="card" data-lesson-id="{{ lesson.id }}">
+    <h3>{{ lesson.title }}</h3>
+    <p>{{ lesson.description }}</p>
     {% if lesson.video %}
-      <video controls style="width: 100%; border-radius: 8px;">
+      <video controls>
         <source src="{{ lesson.video.url }}" type="video/mp4">
       </video>
     {% endif %}
   </div>
 {% empty %}
-  <p style="text-align: center; color: var(--color-muted);">No lessons available yet.</p>
+  <p class="empty-state" id="lessons-empty-state">No lessons available yet.</p>
 {% endfor %}
+</div>
 {% endblock %}

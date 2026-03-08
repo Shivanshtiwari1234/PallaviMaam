@@ -1,0 +1,21 @@
+.hero-section {
+  text-align: center;
+  margin-top: var(--space-6);
+}
+
+.hero-title {
+  margin-bottom: var(--space-3);
+  font-family: "Outfit", "Segoe UI", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  color: var(--color-primary);
+}
+
+.hero-subtitle {
+  max-width: 600px;
+  margin: 0 auto var(--space-4);
+  color: var(--color-muted);
+}
+
+.auth-switch {
+  margin-top: var(--space-3);
+}

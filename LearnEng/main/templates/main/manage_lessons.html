@@ -21,13 +21,16 @@
     <button type="submit" class="btn">Add Lesson</button>
   </form>
 
-  <h3 style="margin-top: 2rem;">Existing Lessons</h3>
-  <ul>
+  <h3 class="subsection-title">Existing Lessons</h3>
+  <ul id="manage-lessons-list">
     {% for lesson in lessons %}
-      <li>{{ lesson.title }}</li>
+      <li data-lesson-id="{{ lesson.id }}">{{ lesson.title }}</li>
     {% empty %}
-      <li>No lessons yet.</li>
+      <li id="manage-lessons-empty">No lessons yet.</li>
     {% endfor %}
   </ul>
 </div>
+{% if latest_lesson_payload %}
+  {{ latest_lesson_payload|json_script:"latest-lesson-payload" }}
+{% endif %}
 {% endblock %}
